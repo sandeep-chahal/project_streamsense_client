@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	:root {
+		--color-primary: #f9f9f6;
+		--color-secondary: #fc7272;
+		--color-black: #202020;
+	}
+}
+
+html {
+	font-family: "Inter", sans-serif;
+	background: var(--color-primary);
+}
