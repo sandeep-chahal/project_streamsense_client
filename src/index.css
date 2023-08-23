@@ -5,8 +5,11 @@
 @layer base {
 	:root {
 		--color-primary: #f9f9f6;
-		--color-secondary: #fc7272;
-		--color-black: #202020;
+		--color-red: #fc7272;
+		--color-black-1: #202020;
+		--color-black-2: #3a3a3a;
+		--color-yellow: #ffef94;
+		--color-green: #88ffce;
 	}
 }
 

@@ -5,8 +5,11 @@ export default {
 		extend: {
 			colors: {
 				primary: "var(--color-primary)",
-				secondary: "var(--color-secondary)",
-				black: "var(--color-black)",
+				red: "var(--color-red)",
+				black1: "var(--color-black-1)",
+				black2: "var(--color-black-2)",
+				yellow: "var(--color-yellow)",
+				green: "var(--color-green)",
 			},
 		},
 	},
