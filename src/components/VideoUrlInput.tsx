@@ -21,9 +21,9 @@ const VideoUrlInput = () => {
 	};
 
 	return (
-		<div className="flex bg-white mx-64 mt-6 p-1 rounded-md">
+		<div className="flex bg-white mx-64 mt-6 p-1 rounded-lg shadow-md">
 			<input
-				className="w-full font-semibold text-black2 text-lg"
+				className="w-full text-black2 px-4  "
 				placeholder="Type Video Url..."
 				value={url}
 				onChange={(e) => setUrl(e.target.value)}

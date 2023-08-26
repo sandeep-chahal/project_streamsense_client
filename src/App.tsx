@@ -1,3 +1,4 @@
+import Conversation from "./components/Conversation";
 import Nav from "./components/Nav";
 import VideoUrlInput from "./components/VideoUrlInput";
 
@@ -9,6 +10,7 @@ function App() {
 				Uncover More In Less Time With StreamSense.
 			</p>
 			<VideoUrlInput />
+			<Conversation />
 		</div>
 	);
 }

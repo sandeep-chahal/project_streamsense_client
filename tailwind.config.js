@@ -6,6 +6,7 @@ export default {
 			colors: {
 				primary: "var(--color-primary)",
 				red: "var(--color-red)",
+				red2: "var(--color-red2)",
 				black1: "var(--color-black-1)",
 				black2: "var(--color-black-2)",
 				yellow: "var(--color-yellow)",
