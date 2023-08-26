@@ -1,10 +1,14 @@
 import Nav from "./components/Nav";
+import VideoUrlInput from "./components/VideoUrlInput";
 
 function App() {
 	return (
 		<div>
 			<Nav />
-			<p className="text-secondary">Click on the Vite and React logos to learn more</p>
+			<p className="block text-center mt-12 text-black1">
+				Uncover More In Less Time With StreamSense.
+			</p>
+			<VideoUrlInput />
 		</div>
 	);
 }
