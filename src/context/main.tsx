@@ -20,6 +20,8 @@ interface IContext {
 	setConversation: React.Dispatch<React.SetStateAction<IConversation[]>>;
 	videoId: string;
 	setVideoId: React.Dispatch<React.SetStateAction<string>>;
+	loginPopup: boolean;
+	setLoginPopup: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const DEFAULT_CONTEXT_VALUE = {
@@ -30,10 +32,12 @@ const DEFAULT_CONTEXT_VALUE = {
 		authenticated: false,
 	},
 	videoId: "",
+	loginPopup: false,
 	setVideoId: () => {},
 	conversation: [],
 	setUser: () => {},
 	setConversation: () => {},
+	setLoginPopup: () => {},
 } as IContext;
 
 export const Context = createContext(DEFAULT_CONTEXT_VALUE);
@@ -43,12 +47,24 @@ type IProps = {
 };
 
 const Provider = ({ children }: IProps) => {
+	const [loginPopup, setLoginPopup] = useState<boolean>(DEFAULT_CONTEXT_VALUE.loginPopup);
 	const [user, setUser] = useState<IUser>(DEFAULT_CONTEXT_VALUE.user);
 	const [videoId, setVideoId] = useState<string>(DEFAULT_CONTEXT_VALUE.videoId);
 	const [conversation, setConversation] = useState<IConversation[]>([]);
 
 	return (
-		<Context.Provider value={{ user, setUser, conversation, setConversation, videoId, setVideoId }}>
+		<Context.Provider
+			value={{
+				user,
+				setUser,
+				conversation,
+				setConversation,
+				videoId,
+				setVideoId,
+				loginPopup,
+				setLoginPopup,
+			}}
+		>
 			{children}
 		</Context.Provider>
 	);
