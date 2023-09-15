@@ -1,4 +1,7 @@
+import { useStore } from "../context/main";
+
 const Nav = () => {
+	const { loginPopup, setLoginPopup } = useStore();
 	return (
 		<nav className="px-64 py-4">
 			<div className="flex items-center justify-between">
@@ -23,7 +26,13 @@ const Nav = () => {
 						$0.0
 					</div>
 					<div className="px-3 ml-5 text-black2 font-bold ">
-						<button>Login</button>
+						<button
+							onClick={() => {
+								setLoginPopup((state) => !state);
+							}}
+						>
+							Login
+						</button>
 					</div>
 				</div>
 			</div>
