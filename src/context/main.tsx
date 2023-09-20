@@ -1,10 +1,11 @@
 import { createContext, useState, useContext } from "react";
 
-interface IUser {
+export interface IUser {
 	name: string;
 	email: string;
 	credits: number;
 	authenticated: boolean;
+	_id: string;
 }
 interface IMessage {
 	type: "ASSISTANT" | "USER";
@@ -30,6 +31,7 @@ const DEFAULT_CONTEXT_VALUE = {
 		email: "",
 		credits: 0,
 		authenticated: false,
+		_id: "",
 	},
 	videoId: "",
 	loginPopup: false,

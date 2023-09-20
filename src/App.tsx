@@ -7,7 +7,7 @@ import { useStore } from "./context/main";
 import LoginPopup from "./components/LoginPopup";
 
 function App() {
-	const { loginPopup, setLoginPopup } = useStore();
+	const { loginPopup } = useStore();
 	return (
 		<div>
 			{loginPopup ? <LoginPopup /> : null}

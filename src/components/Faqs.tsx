@@ -42,8 +42,8 @@ const Faqs = () => {
 			</h3>
 
 			<div>
-				{qna.map((item) => (
-					<div className="mt-2">
+				{qna.map((item, index) => (
+					<div className="mt-2" key={index}>
 						<h4 className="font-medium">Q: {item.question}</h4>
 						<p>A: {item.answer}</p>
 					</div>

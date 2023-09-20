@@ -1,7 +1,7 @@
 import { useStore } from "../context/main";
 
 const Nav = () => {
-	const { loginPopup, setLoginPopup } = useStore();
+	const { setLoginPopup, user } = useStore();
 	return (
 		<nav className="px-64 py-4">
 			<div className="flex items-center justify-between">
@@ -23,15 +23,16 @@ const Nav = () => {
 				<div className="flex items-center justify-center">
 					{/* credits */}
 					<div className="px-3 text-black2 font-bold drop-shadow-md cursor-pointer bg-white rounded-md">
-						$0.0
+						{user?.credits || "$0.0"}
 					</div>
-					<div className="px-3 ml-5 text-black2 font-bold ">
+					<div className="px-3 ml-5 text-black2 font-bold">
 						<button
+							className="capitalize"
 							onClick={() => {
 								setLoginPopup((state) => !state);
 							}}
 						>
-							Login
+							{user?.name || "Login"}
 						</button>
 					</div>
 				</div>
