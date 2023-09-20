@@ -77,3 +77,33 @@ export const handleUserData = (user: any, setUser: React.Dispatch<React.SetState
 	setUser(user);
 	saveToLocalStorage("user", user);
 };
+
+export const FAKE_CONVERSATION: { type: "USER" | "ASSISTANT"; content: string; done?: boolean }[] =
+	[
+		{ type: "USER", content: "Hi!" },
+		{ type: "ASSISTANT", content: "Hi, How are you?", done: true },
+		{ type: "USER", content: "I'm doing great, thanks! How about you?" },
+		{
+			type: "ASSISTANT",
+			content:
+				"I'm an AI, so I don't have feelings, but I'm here to assist you. How can I help you today?",
+			done: true,
+		},
+		{ type: "USER", content: "I have a question about programming. Can you help me with that?" },
+		{
+			type: "ASSISTANT",
+			content:
+				"Of course! I'll do my best to assist you with your programming question. What do you need help with?",
+			done: true,
+		},
+		{
+			type: "USER",
+			content:
+				"I'm trying to implement a sorting algorithm in JavaScript, but I'm having some trouble. Can you show me an example of bubble sort? I'm trying to implement a sorting algorithm in JavaScript, but I'm having some trouble. Can you show me an example of bubble sort?",
+		},
+		{
+			type: "ASSISTANT",
+			content: "",
+			done: false,
+		},
+	];

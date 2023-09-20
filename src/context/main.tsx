@@ -7,9 +7,10 @@ export interface IUser {
 	authenticated: boolean;
 	_id: string;
 }
-interface IMessage {
+export interface IMessage {
 	type: "ASSISTANT" | "USER";
 	content: string;
+	done?: boolean;
 }
 
 type IConversation = IMessage[];
