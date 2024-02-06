@@ -9,11 +9,13 @@ export const handleAuth = async (
 	name?: string
 ): Promise<APIResponse> => {
 	try {
+		console.log("-".repeat(100));
 		const response = await fetch(SERVER_URL + `/auth/${type}`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
 			},
+			credentials: "include",
 			body: JSON.stringify({
 				email,
 				password,

@@ -1,4 +1,5 @@
-import { createContext, useState, useContext } from "react";
+import { createContext, useState, useContext, useEffect } from "react";
+import { getIntialUser } from "../services/utils";
 
 export interface IUser {
 	name: string;
@@ -18,8 +19,8 @@ type IConversation = IMessage[];
 interface IContext {
 	user: IUser;
 	setUser: React.Dispatch<React.SetStateAction<IUser>>;
-	conversation: IConversation[];
-	setConversation: React.Dispatch<React.SetStateAction<IConversation[]>>;
+	conversation: IConversation;
+	setConversation: React.Dispatch<React.SetStateAction<IConversation>>;
 	videoId: string;
 	setVideoId: React.Dispatch<React.SetStateAction<string>>;
 	loginPopup: boolean;
@@ -51,9 +52,11 @@ type IProps = {
 
 const Provider = ({ children }: IProps) => {
 	const [loginPopup, setLoginPopup] = useState<boolean>(DEFAULT_CONTEXT_VALUE.loginPopup);
-	const [user, setUser] = useState<IUser>(DEFAULT_CONTEXT_VALUE.user);
+	const [user, setUser] = useState<IUser>(getIntialUser() || DEFAULT_CONTEXT_VALUE.user);
 	const [videoId, setVideoId] = useState<string>(DEFAULT_CONTEXT_VALUE.videoId);
-	const [conversation, setConversation] = useState<IConversation[]>([]);
+	const [conversation, setConversation] = useState<IConversation>([]);
+
+	useEffect(() => {}, []);
 
 	return (
 		<Context.Provider

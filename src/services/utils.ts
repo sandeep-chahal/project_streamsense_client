@@ -1,5 +1,11 @@
 import { IUser } from "../context/main";
 
+// get user from localstorage without any verifications
+export function getIntialUser(): IUser | null {
+	const user: IUser | null = getFromLocalStorage("user");
+	return user;
+}
+
 function validateEmail(email: string): boolean {
 	// Email regex pattern
 	const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -22,6 +28,7 @@ function getFromLocalStorage(key: string): any {
 	} catch (err) {
 		console.log("Failed Save On LocalStorage");
 		console.log(err);
+		return null;
 	}
 }
 
@@ -93,7 +100,7 @@ export const FAKE_CONVERSATION: { type: "USER" | "ASSISTANT"; content: string; d
 		{
 			type: "ASSISTANT",
 			content:
-				"Of course! I'll do my best to assist you with your programming question. What do you need help with?",
+				"Of course! I'll do my best to assist you with your programming question. What do you need help with?Of course! I'll do my best to assist you with your programming question. What do you need help with?",
 			done: true,
 		},
 		{
