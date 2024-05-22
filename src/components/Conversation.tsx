@@ -1,9 +1,10 @@
 import React, { useState, useRef, useEffect } from "react";
 import { IMessage, useStore } from "../context/main";
 import { SendIcon } from "lucide-react";
-import { FAKE_CONVERSATION } from "../services/utils";
+// import { FAKE_CONVERSATION } from "../services/utils";
 import Message from "./Message";
-import { askMe } from "../services/conversation";
+import { ChunkResponse, askMe } from "../services/conversation";
+import { flushSync } from "react-dom";
 
 const Conversation = () => {
 	const { conversation, setConversation, videoId } = useStore();
@@ -20,20 +21,15 @@ const Conversation = () => {
 		setConversation((con) => {
 			return [...con, message, { type: "ASSISTANT", done: false, content: "" }];
 		});
-		const data = await askMe(videoId, input);
-		console.log("gg", data);
-		setConversation((con) => {
-			const newCon = [...con];
-			newCon.pop();
-			console.log(newCon);
-			return [
-				...newCon,
-				{
-					type: "ASSISTANT",
-					content: data.data?.content || "Something went wrong",
-					done: true,
-				},
-			];
+		await askMe(videoId, input, (data: ChunkResponse) => {
+			console.log(data);
+			setConversation((con) => {
+				const newCon = [...con];
+				const lastConv = newCon.pop();
+				lastConv.content = data.data;
+				lastConv.done = data.done;
+				return [...newCon, lastConv];
+			});
 		});
 	};
 

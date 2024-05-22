@@ -7,7 +7,7 @@ interface IProps {
 const Message = ({ message }: IProps) => {
 	if (message.type === "ASSISTANT") {
 		return (
-			<div className="w-max bg-red2 my-6 p-2 rounded-md w-5/6">
+			<div className="bg-red2 my-6 p-2 rounded-md w-5/6">
 				{message.done ? <span className="">{message.content}</span> : <div>....</div>}
 			</div>
 		);
