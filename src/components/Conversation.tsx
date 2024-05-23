@@ -16,18 +16,24 @@ const Conversation = () => {
 	}, [conversation]);
 
 	const handleAsk = async () => {
-		const message: IMessage = { type: "USER", content: input };
+		const message: IMessage = { type: "USER", content: input, error: false };
 		setInput("");
 		setConversation((con) => {
-			return [...con, message, { type: "ASSISTANT", done: false, content: "" }];
+			return [
+				...con,
+				message,
+				{ type: "ASSISTANT", done: false, content: "", creditUsed: 0, error: false },
+			];
 		});
 		await askMe(videoId, input, (data: ChunkResponse) => {
 			console.log(data);
 			setConversation((con) => {
 				const newCon = [...con];
 				const lastConv = newCon.pop();
-				lastConv.content = data.data;
+				lastConv.content = data.error ? data.error : data.data;
 				lastConv.done = data.done;
+				lastConv.error = Boolean(data.error);
+				lastConv.creditUsed = data.creditUsed ? data.creditUsed : lastConv.creditUsed;
 				return [...newCon, lastConv];
 			});
 		});
@@ -60,7 +66,6 @@ const Conversation = () => {
 							onChange={(e) => setInput(e.target.value)}
 							value={input}
 							onKeyDown={(e) => {
-								console.log(e.key);
 								if (e.key === "Enter") {
 									handleAsk();
 								}

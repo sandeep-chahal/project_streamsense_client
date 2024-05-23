@@ -12,6 +12,8 @@ export interface IMessage {
 	type: "ASSISTANT" | "USER";
 	content: string;
 	done?: boolean;
+	creditUsed?: number;
+	error?: boolean;
 }
 
 type IConversation = IMessage[];

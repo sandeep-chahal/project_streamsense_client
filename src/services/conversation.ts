@@ -1,26 +1,18 @@
 const SERVER_URL: string = import.meta.env.VITE_SERVER_URL!;
 
-interface AIAPIResponse extends APIResponse {
-	data?: {
-		content: string;
-	};
-	creditUsed?: number;
-	creditLeft?: number;
-}
-
 export interface ChunkResponse {
 	data: string;
-	tokens: number | null;
+	creditUsed: number | null;
+	creditLeft: number | null;
 	done: boolean;
-	error: boolean;
-	message: string | null;
+	error: string;
 }
 
 export const askMe = async (
 	videoId: string,
 	question: string,
 	callback: (chunk: ChunkResponse) => void
-): Promise<AIAPIResponse> => {
+): Promise<any> => {
 	try {
 		const response = await fetch(`${SERVER_URL}/ai/ask-me`, {
 			method: "POST",
@@ -35,8 +27,12 @@ export const askMe = async (
 			}),
 		});
 		if (!response.ok) {
-			throw new Error(`Request failed with status: ${response.status}`);
+			const data = await response.json();
+			return callback({ ...data, done: true, creditUsed: 0, creditLeft: 0 });
 		}
+
+		const contentType = response.headers.get("Content-Type");
+		console.log({ contentType });
 
 		const reader = response.body!.getReader();
 		let finalResponse: string = "";
@@ -44,7 +40,13 @@ export const askMe = async (
 		const processChunk = async () => {
 			const { done, value } = await reader.read();
 			if (done) {
-				callback({ data: finalResponse, tokens: null, done: true, error: false, message: null });
+				callback({
+					data: finalResponse,
+					creditLeft: null,
+					done: true,
+					error: null,
+					creditUsed: null,
+				});
 				return;
 			}
 
@@ -64,10 +66,13 @@ export const askMe = async (
 		return;
 	} catch (err) {
 		console.log("Error while asking AI");
-		console.log(err);
-		return {
-			success: false,
+		console.log(err.message);
+		return callback({
+			data: "",
+			creditLeft: null,
+			creditUsed: null,
+			done: true,
 			error: err.message,
-		};
+		});
 	}
 };

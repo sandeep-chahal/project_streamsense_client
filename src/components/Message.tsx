@@ -7,8 +7,9 @@ interface IProps {
 const Message = ({ message }: IProps) => {
 	if (message.type === "ASSISTANT") {
 		return (
-			<div className="bg-red2 my-6 p-2 rounded-md w-5/6">
+			<div className={`${message.error ? "bg-red" : "bg-red2"} my-6 p-2 rounded-md w-5/6`}>
 				{message.done ? <span className="">{message.content}</span> : <div>....</div>}
+				<span className="">{message.creditUsed}</span>
 			</div>
 		);
 	} else
