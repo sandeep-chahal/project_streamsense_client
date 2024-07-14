@@ -10,7 +10,6 @@ const Conversation = () => {
 	const { conversation, setConversation, videoId } = useStore();
 	const [input, setInput] = useState("");
 	const chatBoxRef = useRef<HTMLDivElement | null>(null);
-
 	useEffect(() => {
 		chatBoxRef.current?.scrollTo({ top: 2000000000000, behavior: "smooth" });
 	}, [conversation]);
@@ -27,14 +26,16 @@ const Conversation = () => {
 		});
 		await askMe(videoId, input, (data: ChunkResponse) => {
 			console.log(data);
-			setConversation((con) => {
-				const newCon = [...con];
-				const lastConv = newCon.pop();
-				lastConv.content = data.error ? data.error : data.data;
-				lastConv.done = data.done;
-				lastConv.error = Boolean(data.error);
-				lastConv.creditUsed = data.creditUsed ? data.creditUsed : lastConv.creditUsed;
-				return [...newCon, lastConv];
+			flushSync(() => {
+				setConversation((con) => {
+					const newCon = [...con];
+					const lastConv = newCon.pop();
+					lastConv.content = data.error ? data.error : data.data;
+					lastConv.done = data.done;
+					lastConv.error = Boolean(data.error);
+					lastConv.creditUsed = data.creditUsed ? data.creditUsed : lastConv.creditUsed;
+					return [...newCon, lastConv];
+				});
 			});
 		});
 	};
@@ -58,9 +59,9 @@ const Conversation = () => {
 							</div>
 						)}
 					</div>
-					<div className="bg-gray-100 rounded-lg flex justify-evenly w-full mt-3">
+					<div className="bg-gray-100 rounded-lg flex justify-evenly w-full mt-3 border-b-4 focus-within:border-red2">
 						<input
-							className="py-4 bg-gray-100 rounded-lg w-11/12"
+							className="input py-4 bg-gray-100 rounded-lg w-11/12 outline-none"
 							placeholder="Ask me anything..."
 							disabled={!videoId}
 							onChange={(e) => setInput(e.target.value)}
@@ -71,7 +72,11 @@ const Conversation = () => {
 								}
 							}}
 						/>
-						<button className="p-3" disabled={!videoId} onClick={handleAsk}>
+						<button
+							className="p-3 hover:scale-125 transition-all"
+							disabled={!videoId}
+							onClick={handleAsk}
+						>
 							<SendIcon color="var(--color-red)" />
 						</button>
 					</div>

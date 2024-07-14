@@ -34,3 +34,24 @@ export const handleAuth = async (
 		};
 	}
 };
+
+const getUser = async (): Promise<APIResponse> => {
+	try {
+		const response = await fetch(SERVER_URL + "/get-user", {
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			credentials: "include",
+		});
+		const data: APIResponse = await response.json();
+		return data;
+	} catch (err) {
+		console.log("----------Error From Auth----------");
+		console.log(err);
+		return {
+			success: false,
+			error: "Something Went Wrong!",
+		};
+	}
+};
