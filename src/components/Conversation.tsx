@@ -7,7 +7,7 @@ import { ChunkResponse, askMe } from "../services/conversation";
 import { flushSync } from "react-dom";
 
 const Conversation = () => {
-	const { conversation, setConversation, videoId } = useStore();
+	const { conversation, setConversation, videoId, setUser } = useStore();
 	const [input, setInput] = useState("");
 	const chatBoxRef = useRef<HTMLDivElement | null>(null);
 	useEffect(() => {
@@ -26,6 +26,9 @@ const Conversation = () => {
 		});
 		await askMe(videoId, input, (data: ChunkResponse) => {
 			console.log(data);
+			if (data.creditLeft !== null) {
+				setUser((user) => ({ ...user, credit: data.creditLeft }));
+			}
 			flushSync(() => {
 				setConversation((con) => {
 					const newCon = [...con];

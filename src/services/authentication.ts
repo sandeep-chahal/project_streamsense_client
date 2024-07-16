@@ -35,9 +35,9 @@ export const handleAuth = async (
 	}
 };
 
-const getUser = async (): Promise<APIResponse> => {
+export const getUser = async (): Promise<APIResponse> => {
 	try {
-		const response = await fetch(SERVER_URL + "/get-user", {
+		const response = await fetch(SERVER_URL + "/auth/get-user", {
 			method: "GET",
 			headers: {
 				"Content-Type": "application/json",

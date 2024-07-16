@@ -8,6 +8,11 @@ import LoginPopup from "./components/LoginPopup";
 
 function App() {
 	const { loginPopup } = useStore();
+	const { loadingUser } = useStore();
+
+	if (loadingUser) {
+		return <div>Loading...</div>;
+	}
 	return (
 		<div>
 			{loginPopup ? <LoginPopup /> : null}

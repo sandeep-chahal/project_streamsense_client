@@ -1,7 +1,7 @@
 import { IUser } from "../context/main";
 
 // get user from localstorage without any verifications
-export function getIntialUser(): IUser | null {
+export function getInitialUser(): IUser | null {
 	const user: IUser | null = getFromLocalStorage("user");
 	return user;
 }
@@ -82,7 +82,7 @@ export const validateLoginForum = (email: string, password: string, name: string
 
 export const handleUserData = (user: any, setUser: React.Dispatch<React.SetStateAction<IUser>>) => {
 	setUser(user);
-	saveToLocalStorage("user", user);
+	// saveToLocalStorage("user", user);
 };
 
 export const FAKE_CONVERSATION: { type: "USER" | "ASSISTANT"; content: string; done?: boolean }[] =

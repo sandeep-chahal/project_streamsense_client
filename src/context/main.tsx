@@ -1,10 +1,11 @@
 import { createContext, useState, useContext, useEffect } from "react";
-import { getIntialUser } from "../services/utils";
+import { getInitialUser } from "../services/utils";
+import { getUser } from "../services/authentication";
 
 export interface IUser {
 	name: string;
 	email: string;
-	credits: number;
+	credit: number;
 	authenticated: boolean;
 	_id: string;
 }
@@ -27,16 +28,18 @@ interface IContext {
 	setVideoId: React.Dispatch<React.SetStateAction<string>>;
 	loginPopup: boolean;
 	setLoginPopup: React.Dispatch<React.SetStateAction<boolean>>;
+	loadingUser: boolean;
 }
 
 const DEFAULT_CONTEXT_VALUE = {
 	user: {
 		name: "",
 		email: "",
-		credits: 0,
+		credit: 0,
 		authenticated: false,
 		_id: "",
 	},
+	loadingUser: true,
 	videoId: "",
 	loginPopup: false,
 	setVideoId: () => {},
@@ -54,15 +57,27 @@ type IProps = {
 
 const Provider = ({ children }: IProps) => {
 	const [loginPopup, setLoginPopup] = useState<boolean>(DEFAULT_CONTEXT_VALUE.loginPopup);
-	const [user, setUser] = useState<IUser>(getIntialUser() || DEFAULT_CONTEXT_VALUE.user);
+	const [user, setUser] = useState<IUser>(getInitialUser() || DEFAULT_CONTEXT_VALUE.user);
+	const [loadingUser, setLoadingUser] = useState<boolean>(true);
 	const [videoId, setVideoId] = useState<string>(DEFAULT_CONTEXT_VALUE.videoId);
 	const [conversation, setConversation] = useState<IConversation>([]);
 
-	useEffect(() => {}, []);
+	useEffect(() => {
+		(async () => {
+			const response = await getUser();
+			if (response.success) {
+				setUser(response.data.user);
+			} else {
+				setUser(null);
+			}
+			setLoadingUser(false);
+		})();
+	}, []);
 
 	return (
 		<Context.Provider
 			value={{
+				loadingUser,
 				user,
 				setUser,
 				conversation,
