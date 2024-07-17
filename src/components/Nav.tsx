@@ -50,15 +50,17 @@ const Nav = () => {
 				{/* Right */}
 				<div className="flex items-center justify-center">
 					{/* credits */}
-					<div
-						className="px-3 text-black2 font-bold drop-shadow-md cursor-pointer bg-white rounded-md"
-						onClick={() => {
-							const amount = parseFloat(prompt("Enter amount in USD!"));
-							if (amount) setShowPaymentPopup((open) => amount);
-						}}
-					>
-						{user?.credit ? "$" + user?.credit?.toFixed(2) : "$0.0"}
-					</div>
+					{user?.name ? (
+						<div
+							className="px-3 text-black2 font-bold drop-shadow-md cursor-pointer bg-white rounded-md"
+							onClick={() => {
+								const amount = parseFloat(prompt("Enter amount in USD!"));
+								if (amount) setShowPaymentPopup((open) => amount);
+							}}
+						>
+							{user?.credit ? "$" + user?.credit?.toFixed(2) : "$0.0"}
+						</div>
+					) : null}
 					<div className="px-3 ml-5 text-black2 font-bold relative group">
 						<button
 							className="capitalize flex items-center"
