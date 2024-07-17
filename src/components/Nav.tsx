@@ -1,16 +1,31 @@
 import { useStore } from "../context/main";
-
-import { loadStripe } from "@stripe/stripe-js";
-import { Elements, PaymentElement } from "@stripe/react-stripe-js";
 import { useState } from "react";
 import PaymentPopup from "./PaymentPopup";
-
-const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY!);
+import { logout, deleteAccount } from "../services/authentication";
 
 const Nav = () => {
 	const { setLoginPopup, user } = useStore();
 
 	const [showPaymentPopup, setShowPaymentPopup] = useState(0);
+
+	const handleLogout = async () => {
+		const data = await logout();
+		if (data.success) {
+			window.location.reload();
+		} else {
+			alert(data.error);
+		}
+	};
+	const handleDeleteAccount = async () => {
+		// ask for confirmation
+		if (!confirm("Are you sure you want to delete your account?")) return;
+		const data = await deleteAccount();
+		if (data.success) {
+			window.location.reload();
+		} else {
+			alert(data.error);
+		}
+	};
 
 	return (
 		<nav className="px-64 py-4">
@@ -44,15 +59,58 @@ const Nav = () => {
 					>
 						{user?.credit ? "$" + user?.credit?.toFixed(2) : "$0.0"}
 					</div>
-					<div className="px-3 ml-5 text-black2 font-bold">
+					<div className="px-3 ml-5 text-black2 font-bold relative group">
 						<button
-							className="capitalize"
+							className="capitalize flex items-center"
 							onClick={() => {
-								setLoginPopup((state) => !state);
+								if (!user?.name) setLoginPopup((state) => !state);
 							}}
 						>
 							{user?.name || "Login"}
+							{user?.name ? (
+								<svg
+									className="w-2.5 h-2.5 ms-3"
+									aria-hidden="true"
+									xmlns="http://www.w3.org/2000/svg"
+									fill="none"
+									viewBox="0 0 10 6"
+								>
+									<path
+										stroke="currentColor"
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										stroke-width="2"
+										d="m1 1 4 4 4-4"
+									/>
+								</svg>
+							) : null}
 						</button>
+
+						<div
+							id="dropdown"
+							className={`z-10 hidden ${
+								user?.name ? "group-hover:block" : null
+							} bg-white divide-y divide-gray-100 rounded-lg shadow w-44  absolute left-0 top-[100%]`}
+						>
+							<ul className="py-2 text-sm" aria-labelledby="dropdownDefaultButton">
+								<li>
+									<button
+										onClick={handleDeleteAccount}
+										className="block w-full px-4 py-2 hover:bg-gray-100"
+									>
+										Delete Account
+									</button>
+								</li>
+								<li>
+									<button
+										onClick={handleLogout}
+										className="block w-full px-4 py-2 hover:bg-gray-100"
+									>
+										Logout
+									</button>
+								</li>
+							</ul>
+						</div>
 					</div>
 				</div>
 			</div>

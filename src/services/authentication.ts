@@ -55,3 +55,45 @@ export const getUser = async (): Promise<APIResponse> => {
 		};
 	}
 };
+
+export const logout = async (): Promise<APIResponse> => {
+	try {
+		const response = await fetch(SERVER_URL + "/auth/logout", {
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			credentials: "include",
+		});
+		const data: APIResponse = await response.json();
+		return data;
+	} catch (err) {
+		console.log("----------Error From Auth----------");
+		console.log(err);
+		return {
+			success: false,
+			error: "Something Went Wrong!",
+		};
+	}
+};
+
+export const deleteAccount = async (): Promise<APIResponse> => {
+	try {
+		const response = await fetch(SERVER_URL + "/auth/delete-account", {
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			credentials: "include",
+		});
+		const data: APIResponse = await response.json();
+		return data;
+	} catch (err) {
+		console.log("----------Error From Auth----------");
+		console.log(err);
+		return {
+			success: false,
+			error: "Something Went Wrong!",
+		};
+	}
+};
