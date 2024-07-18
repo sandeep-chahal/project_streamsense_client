@@ -62,7 +62,7 @@ const Conversation = () => {
 							</div>
 						)}
 					</div>
-					<div className="bg-gray-100 rounded-lg flex justify-evenly w-full mt-3 border-b-4 focus-within:border-red2">
+					<div className="bg-gray-100 rounded-lg flex justify-evenly w-full mt-3 border-b-4 focus-within:border-red2 animating-border">
 						<input
 							className="input py-4 bg-gray-100 rounded-lg w-11/12 outline-none"
 							placeholder="Ask me anything..."

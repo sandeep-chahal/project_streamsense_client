@@ -28,7 +28,7 @@ const Nav = () => {
 	};
 
 	return (
-		<nav className="px-64 py-4">
+		<nav className="px-4 py-3 sm:w-[70%] mx-auto bg-white mt-4 rounded-2xl bg-opacity-80 shadow-md">
 			{!!showPaymentPopup && (
 				<PaymentPopup amount={showPaymentPopup} close={() => setShowPaymentPopup(0)} />
 			)}
@@ -36,7 +36,7 @@ const Nav = () => {
 				{/* Left */}
 				<h1 className="font-bold text-2xl">StreamSense</h1>
 				{/* Center */}
-				<ul className="flex items-center justify-center">
+				{/* <ul className="flex items-center justify-center">
 					<li className="px-3">
 						<a href="#faqs">Faqs</a>
 					</li>
@@ -46,13 +46,13 @@ const Nav = () => {
 					<li className="px-3">
 						<a href="#extension">Extension</a>
 					</li>
-				</ul>
+				</ul> */}
 				{/* Right */}
 				<div className="flex items-center justify-center">
 					{/* credits */}
 					{user?.name ? (
 						<div
-							className="px-3 text-black2 font-bold drop-shadow-md cursor-pointer bg-white rounded-md"
+							className="px-3 font-bold text-red cursor-pointer bg-white rounded-md"
 							onClick={() => {
 								const amount = parseFloat(prompt("Enter amount in USD!"));
 								if (amount) setShowPaymentPopup((open) => amount);
@@ -61,7 +61,7 @@ const Nav = () => {
 							{user?.credit ? "$" + user?.credit?.toFixed(2) : "$0.0"}
 						</div>
 					) : null}
-					<div className="px-3 ml-5 text-black2 font-bold relative group">
+					<div className="px-3 ml-1 text-black2 font-bold relative group">
 						<button
 							className="capitalize flex items-center"
 							onClick={() => {
@@ -117,11 +117,11 @@ const Nav = () => {
 				</div>
 			</div>
 			{/* border lines */}
-			<div className="mt-4">
+			{/* <div className="mt-4">
 				<div className="bg-red w-full h-[1px] mb-[1px]"></div>
 				<div className="bg-green w-full h-[1px] mb-[1px]"></div>
 				<div className="bg-yellow w-full h-[1px] mb-[1px]"></div>
-			</div>
+			</div> */}
 		</nav>
 	);
 };

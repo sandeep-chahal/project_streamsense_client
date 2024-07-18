@@ -15,9 +15,14 @@ function App() {
 	}
 	return (
 		<div>
+			<div className="anim1">
+				<div className="anim2">
+					<div className="anim3"></div>
+				</div>
+			</div>
 			{loginPopup ? <LoginPopup /> : null}
 			<Nav />
-			<p className="block text-center mt-12 text-black1">
+			<p className="block text-center mt-6 text-black2 font-bold">
 				Uncover More In Less Time With StreamSense.
 			</p>
 			<VideoUrlInput />
