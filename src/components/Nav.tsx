@@ -26,7 +26,7 @@ const Nav = () => {
 	};
 
 	return (
-		<nav className="sticky top-0 md:top-1 px-4 py-3 w-[100%] md-0 md:mt-4 md:w-[70%] mx-auto bg-white rounded-b-2xl md:rounded-2xl bg-opacity-80 shadow-md">
+		<nav className="sticky top-0 z-50 md:top-1 px-4 py-3 w-[100%] md-0 md:mt-4 md:w-[70%] mx-auto bg-white rounded-b-2xl md:rounded-2xl bg-opacity-80 shadow-md">
 			<div className="flex items-center justify-between">
 				{/* Left */}
 				<h1 className="font-bold text-2xl">StreamSense</h1>
