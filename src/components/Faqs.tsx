@@ -35,7 +35,7 @@ const qna = [
 
 const Faqs = () => {
 	return (
-		<div className="mx-64 mt-16">
+		<div className="mt-16">
 			<h3 className="flex items-center ">
 				<HelpCircleIcon className="mr-2" />
 				<p className="font-bold">Faqs</p>

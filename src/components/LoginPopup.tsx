@@ -13,8 +13,8 @@ const LoginPopup = () => {
 	const { setLoginPopup, setUser } = useStore();
 	const [mode, setMode] = useState(1); //1 for login, 2 for signup
 	const [name, setName] = useState("");
-	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
+	const [email, setEmail] = useState(import.meta.env.DEV ? "test@gmail.com" : "");
+	const [password, setPassword] = useState(import.meta.env.DEV ? "Password@12" : "");
 	const [error, setError] = useState<IError | null>(null);
 
 	const handleLoginClick = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -48,18 +48,23 @@ const LoginPopup = () => {
 	};
 
 	return (
-		<div className="fixed w-full h-full bg-black bg-opacity-20 z-50">
+		<div className="fixed top-0 w-full h-full bg-black bg-opacity-20 z-50">
 			<div className="bg-white w-4/5 md:w-96 p-4 rounded-lg relative  c-center">
 				<div className="flex justify-between items-center">
 					<h2 className="text-lg font-bold">{mode === 1 ? "Login" : "Register"}</h2>
 					<XIcon className="cursor-pointer" onClick={() => setLoginPopup(false)} />
 				</div>
+				<p className="mt-2">
+					{mode === 1
+						? "Login to your account"
+						: "Register to create an account and start using our services"}
+				</p>
 				<form className="mt-8">
 					{mode === 2 && (
 						<input
 							type="text"
 							required
-							className="w-full bg-primary border-2 border-yellow p-2 mb-6"
+							className="w-full border-2 border-yellow p-2 mb-6"
 							placeholder="Name"
 							value={name}
 							onChange={(e) => setName(e.target.value)}
@@ -68,14 +73,14 @@ const LoginPopup = () => {
 					<input
 						type="email"
 						required
-						className="w-full bg-primary border-2 border-yellow p-2"
+						className="w-full border-2 p-2"
 						placeholder="Email"
 						value={email}
 						onChange={(e) => setEmail(e.target.value)}
 					/>
 					<input
 						type="password"
-						className="w-full bg-primary border-2 border-yellow p-2 mt-6"
+						className="w-full border-2  p-2 mt-6"
 						placeholder="Password"
 						value={password}
 						onChange={(e) => setPassword(e.target.value)}
@@ -93,7 +98,7 @@ const LoginPopup = () => {
 								setMode((s) => (s === 1 ? 2 : 1));
 								setError(null);
 							}}
-							className="block text-center cursor-pointer mt-4 p-2 text-red font-medium hover:underline"
+							className="block text-center cursor-pointer mt-2 p-2 text-red font-medium hover:underline"
 						>
 							{mode === 1 ? "Register" : "Login"}
 						</div>

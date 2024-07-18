@@ -29,6 +29,8 @@ interface IContext {
 	loginPopup: boolean;
 	setLoginPopup: React.Dispatch<React.SetStateAction<boolean>>;
 	loadingUser: boolean;
+	showPaymentPopup: number;
+	setShowPaymentPopup: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const DEFAULT_CONTEXT_VALUE = {
@@ -47,6 +49,8 @@ const DEFAULT_CONTEXT_VALUE = {
 	setUser: () => {},
 	setConversation: () => {},
 	setLoginPopup: () => {},
+	showPaymentPopup: 0,
+	setShowPaymentPopup: () => {},
 } as IContext;
 
 export const Context = createContext(DEFAULT_CONTEXT_VALUE);
@@ -61,6 +65,7 @@ const Provider = ({ children }: IProps) => {
 	const [loadingUser, setLoadingUser] = useState<boolean>(true);
 	const [videoId, setVideoId] = useState<string>(DEFAULT_CONTEXT_VALUE.videoId);
 	const [conversation, setConversation] = useState<IConversation>([]);
+	const [showPaymentPopup, setShowPaymentPopup] = useState<number>(0);
 
 	useEffect(() => {
 		(async () => {
@@ -86,6 +91,8 @@ const Provider = ({ children }: IProps) => {
 				setVideoId,
 				loginPopup,
 				setLoginPopup,
+				showPaymentPopup,
+				setShowPaymentPopup,
 			}}
 		>
 			{children}

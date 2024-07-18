@@ -89,7 +89,7 @@ const PaymentPopup = ({ amount, close }: { amount: number; close: () => void }) 
 	}, [amount]);
 
 	return (
-		<div className="fixed top-0 left-0 w-[100vw] h-[100vh] bg-black bg-opacity-30 z-[5000]">
+		<div className="fixed top-0 left-0 w-[100vw] h-[100vh] bg-black bg-opacity-30 z-[500000]">
 			<div className="relative bg-white w-[500px] max-w-[90%] max-h-[80vh] overflow-auto m-auto top-20 p-10 rounded-lg">
 				<button
 					className="absolute right-5 top-5 button bg-rose-600 text-white px-3 py-1 rounded-sm"

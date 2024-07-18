@@ -44,7 +44,7 @@ const Conversation = () => {
 	};
 
 	return (
-		<div className="mx-64 mt-14 rounded-lg p-1 bg-gradient-to-b from-yellow to-red2">
+		<div className="mt-14 rounded-lg p-1 bg-gradient-to-b from-yellow to-red2">
 			<div className="bg-white">
 				<div className="w-[97%] mx-auto rounded-xl relative pb-4">
 					<div className="h-80 max-h-[80vh] px-8 py-4 overflow-auto flex flex-col" ref={chatBoxRef}>

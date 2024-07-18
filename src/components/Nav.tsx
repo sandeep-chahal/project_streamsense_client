@@ -4,9 +4,7 @@ import PaymentPopup from "./PaymentPopup";
 import { logout, deleteAccount } from "../services/authentication";
 
 const Nav = () => {
-	const { setLoginPopup, user } = useStore();
-
-	const [showPaymentPopup, setShowPaymentPopup] = useState(0);
+	const { setLoginPopup, user, setShowPaymentPopup } = useStore();
 
 	const handleLogout = async () => {
 		const data = await logout();
@@ -28,10 +26,7 @@ const Nav = () => {
 	};
 
 	return (
-		<nav className="px-4 py-3 sm:w-[70%] mx-auto bg-white mt-4 rounded-2xl bg-opacity-80 shadow-md">
-			{!!showPaymentPopup && (
-				<PaymentPopup amount={showPaymentPopup} close={() => setShowPaymentPopup(0)} />
-			)}
+		<nav className="sticky top-0 md:top-1 px-4 py-3 w-[100%] md-0 md:mt-4 md:w-[70%] mx-auto bg-white rounded-b-2xl md:rounded-2xl bg-opacity-80 shadow-md">
 			<div className="flex items-center justify-between">
 				{/* Left */}
 				<h1 className="font-bold text-2xl">StreamSense</h1>
@@ -92,7 +87,7 @@ const Nav = () => {
 							id="dropdown"
 							className={`z-10 hidden ${
 								user?.name ? "group-hover:block" : null
-							} bg-white divide-y divide-gray-100 rounded-lg shadow w-44  absolute left-0 top-[100%]`}
+							} bg-white divide-y divide-gray-100 rounded-lg shadow w-44  absolute right-0 md:left-0 top-[100%]`}
 						>
 							<ul className="py-2 text-sm" aria-labelledby="dropdownDefaultButton">
 								<li>

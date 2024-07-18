@@ -21,7 +21,7 @@ const VideoUrlInput = () => {
 	};
 
 	return (
-		<div className="flex bg-white mx-64 mt-6 p-1 rounded-lg shadow-md">
+		<div className="flex bg-white mt-6 p-1 rounded-lg shadow-md">
 			<input
 				className="w-full text-black2 px-4  "
 				placeholder="Type Video Url..."
