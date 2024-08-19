@@ -1,6 +1,4 @@
 import { useStore } from "../context/main";
-import { useState } from "react";
-import PaymentPopup from "./PaymentPopup";
 import { logout, deleteAccount } from "../services/authentication";
 
 const Nav = () => {
@@ -50,7 +48,7 @@ const Nav = () => {
 							className="px-3 font-bold text-red cursor-pointer bg-white rounded-md"
 							onClick={() => {
 								const amount = parseFloat(prompt("Enter amount in USD!"));
-								if (amount) setShowPaymentPopup((open) => amount);
+								if (amount) setShowPaymentPopup(() => amount);
 							}}
 						>
 							{user?.credit ? "$" + user?.credit?.toFixed(2) : "$0.0"}

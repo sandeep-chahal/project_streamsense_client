@@ -1,16 +1,9 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { loadStripe } from "@stripe/stripe-js";
-import {
-	Elements,
-	CardElement,
-	useStripe,
-	useElements,
-	PaymentElement,
-} from "@stripe/react-stripe-js";
-
+import { Elements, useStripe, useElements, PaymentElement } from "@stripe/react-stripe-js";
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY!);
 
-const PaymentForm = ({ amount, paymentIntent, close }: any) => {
+const PaymentForm = ({ paymentIntent, close }: any) => {
 	const stripe = useStripe();
 	const elements = useElements();
 	const [error, setError] = useState(null);

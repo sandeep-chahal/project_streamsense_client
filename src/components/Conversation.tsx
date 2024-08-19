@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import { IMessage, useStore } from "../context/main";
 import { SendIcon } from "lucide-react";
 // import { FAKE_CONVERSATION } from "../services/utils";

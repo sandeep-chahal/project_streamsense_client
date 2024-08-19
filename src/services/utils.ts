@@ -13,7 +13,7 @@ function validateEmail(email: string): boolean {
 	return emailPattern.test(email);
 }
 
-function saveToLocalStorage(key: string, data: any) {
+export function saveToLocalStorage(key: string, data: any) {
 	try {
 		localStorage.setItem(key, JSON.stringify(data));
 	} catch (err) {

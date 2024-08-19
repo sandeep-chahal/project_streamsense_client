@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { XIcon } from "lucide-react";
-import { IUser, useStore } from "../context/main";
+import { useStore } from "../context/main";
 import { handleUserData, validateLoginForum } from "../services/utils";
 import { handleAuth } from "../services/authentication";
 
